@@ -5,22 +5,22 @@
 
 body {
   font-family: Topaz;
-  font-size: 16px; background-color: #000; color: #ccc; font-weight: normal;
+  font-size: 16px; background-color: #222222; color: #DC2F02; font-weight: normal;
   line-height: 16px;
 }
-a { color: #99c; text-decoration: none; }
-a:visited { color: #99c; }
-a:hover { color: #ddf; }
-a.down:hover { color: #fdd !important; }
+a { color: #F48C06; text-decoration: none; }
+a:visited { color: #F48C06; }
+a:hover { color: #FFBA08; }
+a.down:hover { color: #FFBA08 !important; }
 
-a.inactive, a.inactive:visited, a.inactive:hover { color: #445; }
+a.inactive, a.inactive:visited, a.inactive:hover { color: #6A040F; }
 
-.tdalink { color: #113 !important; }
-.tdalink:hover { color: #558 !important; }
-.tdalink:visited { color:#113 !important; }
+.tdalink { color: #000 !important; }
+.tdalink:hover { color: #6A040F !important; }
+.tdalink:visited { color:#000 !important; }
 
 select, input {
-  background-color: #000; color: #8f8;
+  background-color: #000; color: #FAA307;
   font-family: Topaz;
   font-size: 16px;
   margin-bottom: 16px;
@@ -28,28 +28,32 @@ select, input {
   outline: none; font-style: normal; font-weight: normal;
   line-height: 16px;
 }
-optgroup { font-family: Topaz; font-size: 16px; color: #88f; font-style: normal; font-weight: normal; line-height: 16px; }
-option { font-family: Topaz; color: #8f8; font-size: 16px; height: 16px; line-height: 16px; padding: 0; }
+input#loadfilter {
+  border: 1px solid #FFBA08;
+  background-color: #000;
+}
+optgroup { font-family: Topaz; font-size: 16px; color: #E85D04; font-style: normal; font-weight: normal; line-height: 16px; }
+option { font-family: Topaz; color: #FAA307; font-size: 16px; height: 16px; line-height: 16px; padding: 0; }
 .odd { background-color: #181818; }
-.even { background-color: #222222; }
+.even { background-color: #000; }
 
 option:focus,
 option:active,
 option:checked {
-  background-color: #aae;
+  background-color: #000;
   color: #fff;
 }
 
 ::-webkit-scrollbar {
   width: 16px;
   color: #fff;
-  border: 1px solid #484;
-  background-color: #242;
+  border: 1px solid #000;
+  background-color: #6A040F;
 }
 ::-webkit-scrollbar-thumb {
-  color: #88f;
-  background-color: #484;
-  border: 1px solid #fff;
+  color: #fff;
+  background-color: #DC2F02;
+  border: 1px solid #000;
 }
 
 #outercontainer {
@@ -57,17 +61,18 @@ option:checked {
   margin: 0 auto 0 auto;
 }
 
-#headercontainer { background-color:#0bc; color:#000; margin-bottom:8px; padding-top: 1px; padding-bottom: 1px; }
+#headercontainer { background-color: #D00000; color:#000; margin-bottom:8px; padding-top: 1px; padding-bottom: 1px; }
 
-#modtitle { white-space: pre; color: #fff; }
-#modinfo { color: #aaa; }
-#modtimer { color: #99b; }
+#modtitle { white-space: pre; color: #FFBA08; }
+#modinfo { color: #DC2F02; }
+#modtimer { color: #DC2F02; }
 
-#modsamples { white-space:pre; float:right; margin-left:8px; color: #888 }
+#modsamples { white-space:pre; float:right; margin-left:8px; color: #FAA307 }
 
-#modpattern { white-space:pre; float:left; margin-top: 16px; height: 24.0em; overflow: hidden; color: #778; }
+#modpattern { white-space:pre; float:left; margin-top: 16px; height: 24.0em; overflow: hidden; color: #F48C06; }
 
-#infotext { margin-top: 16px; color: #aae; }
+#infotext { margin-top: 16px; color: #F48C06; }
+#infotext a { color: #DC2F02 !important; }
 
 /* #load_song { float:right; } */
 
@@ -77,7 +82,6 @@ option:checked {
 #playlist_box { width: 416px; }
 
 #musiclibrary {
-  color: #aae;
   width: 500px;
   float: left;
 }
@@ -85,21 +89,20 @@ option:checked {
 #playlist {
   width: 420px;
   float: right;
-  color: #aae;
 }
 
-.hl { color: #fff; }
-.down { color: #faa !important; }
+.hl { color: #FFBA08; }
+.down { color: #DC2F02 !important; }
 
-.note { color: #88f; }
-.sample { color: #8ff; }
-.command { color: #8f8; }
-.volume { color: #a4c; }
+.note { color: #DC2F02; }
+.sample { color: #9D0208; }
+.command { color: #FFBA08; }
+.volume { color: #9D0208; }
 
-.samplelist { background-color: #000; color: #778; }
-.activesample { background-color: #135; color: #fff; }
+.samplelist { background-color: #000; }
+.activesample { background-color: #6A040F; color: #FFBA08; }
 
-.currentrow { background-color: #335; color: #ccc; }
+.currentrow { background-color: #370617; color: #FFBA08; }
 
 .filesize { color: #444; }
 
@@ -115,7 +118,7 @@ option:checked {
 }
 
 #modchannels {
-  white-space:pre; float:left; margin-top: 16px; height: 24.0em; overflow: hidden; color: #99b;
+  white-space:pre; float:left; margin-top: 16px; height: 24.0em; overflow: hidden; color: #6A040F;
   display: none;
 }
 
@@ -128,5 +131,5 @@ option:checked {
   float:left;
 }
 
-.channelnr { color:#778; }
-.channelsample { color:#778; }
+.channelnr { color:#DC2F02; }
+.channelsample { color:#DC2F02; }
