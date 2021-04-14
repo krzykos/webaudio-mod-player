@@ -701,10 +701,10 @@ $(document).ready(function() {
 
   // all done, load the song library and default module
   var request = new XMLHttpRequest();
-  request.open("GET", "/musicLibrary.php", true);
-  request.responseType = "json";
+  request.open("GET", "musicLibrary.json", true);
+  //request.responseType = "json";
   request.onload = function() {
-    window.musicLibrary=eval(request.response);
+    window.musicLibrary=JSON.parse(request.response);
     updateSelectBox(null);
 
     if (window.defaultComposer != "") {
