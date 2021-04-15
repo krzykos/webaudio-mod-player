@@ -354,11 +354,11 @@ $(document).ready(function() {
     var s=window.currentModule.split("/");
     if (s.length > 1) {
       $("title").html(s[1]+" - module player for Web Audio");
-      if (window.location.protocol !== "file:")
+      if (false && window.location.protocol !== "file:")
         window.history.pushState("object of string", "Title", "/"+s[0]+"/"+s[1]);
     } else {
       $("title").html(s[0]+" - module player for Web Audio");
-      if (window.location.protocol !== "file:")
+      if (false && window.location.protocol !== "file:")
         window.history.pushState("object of string", "Title", "/"+s[0]);
     }
 
