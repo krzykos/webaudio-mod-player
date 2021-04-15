@@ -21,6 +21,10 @@ None of the player classes fully implement all the features and effects in each 
 be implemented. In addition, there most certainly will be some playback bugs in each player class - let me know if you run
 into some bad ones. 
 
+You can test the player here:
+
+<a href="https://music.cryptofolio.live">https://music.cryptofolio.live</a>
+
 
 Copyrights:
 - MOD/S3M/XM module player for Web Audio (c) 2021 krzykos
