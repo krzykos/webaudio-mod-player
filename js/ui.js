@@ -354,12 +354,10 @@ $(document).ready(function() {
     var s=window.currentModule.split("/");
     if (s.length > 1) {
       $("title").html(s[1]+" - module player for Web Audio");
-      if (false && window.location.protocol !== "file:")
-        window.history.pushState("object of string", "Title", "/"+s[0]+"/"+s[1]);
+      window.history.pushState("object of string", "Title", "/"+s[0]+"/"+s[1]);
     } else {
       $("title").html(s[0]+" - module player for Web Audio");
-      if (false && window.location.protocol !== "file:")
-        window.history.pushState("object of string", "Title", "/"+s[0]);
+      window.history.pushState("object of string", "Title", "/"+s[0]);
     }
 
     if (window.playlistActive) {
@@ -701,7 +699,7 @@ $(document).ready(function() {
 
   // all done, load the song library and default module
   var request = new XMLHttpRequest();
-  request.open("GET", "musicLibrary.json", true);
+  request.open("GET", "/musicLibrary.json", true);
   //request.responseType = "json";
   request.onload = function() {
     window.musicLibrary=JSON.parse(request.response);

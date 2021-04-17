@@ -1,0 +1,23 @@
+{
+  "name": "webaudio-mod-player",
+  "version": "1.0.0",
+  "description": "MOD/S3M/XM module player for Web Audio",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.17.1",
+    "opn": "^6.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krzykos/webaudio-mod-player.git"
+  },
+  "author": "krzykos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krzykos/webaudio-mod-player/issues"
+  },
+  "homepage": "https://github.com/krzykos/webaudio-mod-player#readme"
+}
