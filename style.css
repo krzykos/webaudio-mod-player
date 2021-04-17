@@ -12,6 +12,8 @@ a { color: #F48C06; text-decoration: none; }
 a:visited { color: #F48C06; }
 a:hover { color: #FFBA08; }
 a.down:hover { color: #FFBA08 !important; }
+a#load_song { color: #D00000; background: #FFBA08; padding: 2px; }
+a#load_song:hover { color: #6A040F; }
 
 a.inactive, a.inactive:visited, a.inactive:hover { color: #6A040F; }
 
