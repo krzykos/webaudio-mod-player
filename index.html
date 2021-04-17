@@ -14,6 +14,17 @@
     <script type="text/javascript">
       window.musicPath='/mods/';
       window.musicLibrary=[];
+      const _route = window.location.pathname.split('/').slice(1);
+      if (_route.length >= 2 && _route[1] !== '') {
+        window.currentModule = decodeURIComponent(_route.join('/'));
+        window.defaultComposer = '';
+      } else if (_route.length >= 1 && _route[0] !== '') {
+        window.currentModule = undefined;
+        window.defaultComposer = _route[0];
+      } else {
+        window.currentModule = undefined;
+        window.defaultComposer = undefined;
+      }
     </script>
   </head>
   <body>

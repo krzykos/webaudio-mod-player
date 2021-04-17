@@ -353,8 +353,8 @@ $(document).ready(function() {
     $("#modinfo").append("('"+this.signature+"')");
     var s=window.currentModule.split("/");
     if (s.length > 1) {
-      $("title").html(s[1]+" - module player for Web Audio");
-      window.history.pushState("object of string", "Title", "/"+s[0]+"/"+s[1]);
+      $("title").html(s[s.length-1]+" - module player for Web Audio");
+      window.history.pushState("object of string", "Title", "/"+s.join("/"));
     } else {
       $("title").html(s[0]+" - module player for Web Audio");
       window.history.pushState("object of string", "Title", "/"+s[0]);
