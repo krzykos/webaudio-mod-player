@@ -107,6 +107,13 @@ function vu(l)
   return b;
 }
 
+function time(t)
+{
+  t = t.toFixed(0);
+  sec = t%60;
+  return `${Math.floor(t/60)}:${sec<10 ? '0' : ''}${sec}`;
+}
+
 function showLoaderInfo(module)
 {
   window.loaderInterval=setInterval(function(){
@@ -262,6 +269,14 @@ function updateUI(timestamp)
     }
 
     if (oldrow != mod.row || oldpos != mod.position) {
+      if (mod.player.current_time && mod.player.total_time) {
+        $("#time").replaceWith("<span id=\"time\">"+
+          "<span class=\"hl\">"+time(mod.player.current_time())+"</span>/"+
+          "<span class=\"hl\">"+time(mod.player.total_time())+"</span>"+
+          "</span>");
+      } else {
+        $("#time").replaceWith("<span id=\"time\"></span>");
+      }
       $("#modtimer").replaceWith("<span id=\"modtimer\">"+
         "pos <span class=\"hl\">"+hb(mod.position)+"</span>/<span class=\"hl\">"+hb(mod.songlen)+"</span> "+
         "row <span class=\"hl\">"+hb(mod.row)+"</span>/<span class=\"hl\">"+hb(mod.currentpattlen()-1)+"</span> "+

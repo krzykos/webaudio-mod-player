@@ -108,6 +108,8 @@ Protracker.prototype.clearsong = function()
   this.note=new Array();
   this.pattern_unpack=new Array();
   this.track_index=null;
+  this.position_map=null;
+  this.seek_map=null;
 
   this.looprow=0;
   this.loopstart=0;
@@ -359,14 +361,100 @@ Protracker.prototype.parse = function(buffer)
   this.chvu=new Float32Array(this.channels);
   for(i=0;i<this.channels;i++) this.chvu[i]=0.0;
 
+  this.generateTimeMaps();
   return true;
 }
 
+Protracker.prototype.generateTimeMaps = function() {
+  let ticks = 0;
+  let speed = this.speed, bpm = this.bpm;
+  let looprow = 0, loopcount = 0;
+  const mod = this;
+  this.seek_map = [];
+  this.position_map = [];
+  pos: for (let pos = 0; pos < this.songlen; pos++) {
+    if (this.position_map[pos]) break;
+    let rowJump = null;
+    row: for (let row = rowJump || 0; row < 64; row++) {
+      let posJump = null;
+      ch: for (let ch = 0; ch < mod.channels; ch++) {
+        const pattern = mod.pattern[mod.track_index ?
+          mod.track_index[pos*mod.channels*2+ch*2] : mod.patterntable[pos]
+        ];
+        const pp = mod.track_index ? row*4 : row * 4 * mod.channels + ch * 4;
+        const command = pattern[pp+2] & 0x0f;
+        const data = pattern[pp+3];
+        switch (command) {
+        case 0xb:
+          rowJump = 0;
+          posJump = data-1;
+          break ch;
+        case 0xd:
+          rowJump = ((data&0xf0)>>4)*10 + (data&0x0f);
+          posJump = pos;
+          break ch;
+        case 0xe:
+          if ((data&0xf0)>>4 == 6) {
+            if (!(data&0xf)) looprow = row;
+            else {
+              loopcount = !loopcount ? data&0xf : loopcount-1;
+              if (loopcount) {
+                rowJump = looprow-1;
+                break ch;
+              }
+            }
+          }
+          break;
+        case 0xf:
+          if (data > 32) bpm = data;
+          else speed = data;
+          break;
+        }
+      }
+      const second = Math.floor(ticks/(bpm*0.4));
+      if (this.seek_map.length <= second) this.seek_map.push({ pos, row, looprow, loopcount });
+      this.position_map[pos] ||= [];
+      this.position_map[pos][row] ||= [];
+      this.position_map[pos][row][loopcount] = second;
+      ticks += speed;
+      if (posJump !== null) {
+        pos = posJump;
+        continue pos;
+      }
+      if (rowJump !== null) {
+        row = rowJump;
+        rowJump = null;
+        continue row;
+      }
+    }
+  }
+}
+
+Protracker.prototype.current_time = function() {
+  return this.position_map[this.position][this.row][this.loopcount];
+}
+
+Protracker.prototype.total_time = function() {
+  return this.seek_map.length-1;
+}
+
+Protracker.prototype.seek = function(second) {
+  if (!this.seek_map[second]) return;
+  const { pos, row, looprow, loopcount } = this.seek_map[second];
+  const mod = this;
+  mod.position = pos;
+  mod.row = row;
+  mod.flags &= 0xe1;
+  mod.flags |= 2;
+  mod.looprow = looprow;
+  mod.loopcount = loopcount;
+}
 
 
 // advance player
 Protracker.prototype.advance = function(mod) {
   var spd=(((mod.samplerate*60)/mod.bpm)/4)/6;
+  var time=this.current_time();
 
   // advance player
   if (mod.offset>spd) { mod.tick++; mod.offset=0; mod.flags|=1; }
@@ -411,6 +499,10 @@ Protracker.prototype.advance = function(mod) {
       //mod.stop();
     }
     return;
+  }
+  if (!mod.repeat && this.current_time() < time) {
+    this.endofsong=true;
+    //mod.stop();
   }
 }
 
