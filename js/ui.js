@@ -541,9 +541,9 @@ $(document).ready(function() {
     $("#innercontainer").show();
     var loadInterval=setInterval(function(){
       if (!module.delayload) {
-         window.currentModule=$("#modfile").val();
+         window.currentModule=($("#modfile").val()||[])[0];
          window.playlistActive=false;
-         module.load(musicPath+$("#modfile").val());
+         module.load(musicPath+($("#modfile").val()||[])[0]);
          clearInterval(loadInterval);
          showLoaderInfo(module);
       }
@@ -558,8 +558,9 @@ $(document).ready(function() {
   });
 
   $("#add_playlist").click(function(){
-    var song=$("#modfile").val();
-    if (addToPlaylist(song)) refreshStoredPlaylist();
+    var songs=$("#modfile").val() || [];
+    for (var i=0; i < songs.length; i++) { addToPlaylist(songs[i]); }
+    refreshStoredPlaylist();
     return false;
   });
 
@@ -584,7 +585,8 @@ $(document).ready(function() {
   });
 
   $("#playlist_jumpto").click(function(){
-    var opt=$("#playlist_box option:selected");
+    var opt=$("#playlist_box option:selected").first();
+    if (!opt.length) { opt = $("#playlist_box option").first(); }
     if (opt.length) {
       if (module.playing) module.stop();
       oldpos=-1;
@@ -593,10 +595,10 @@ $(document).ready(function() {
       $("#innercontainer").show();
       var loadInterval=setInterval(function(){
         if (!module.delayload) {
-           window.currentModule=$("#playlist_box option:selected").val();
-           window.playlistPosition=$("#playlist_box option").index($("#playlist_box option:selected"));
+           window.currentModule=opt.val();
+           window.playlistPosition=$("#playlist_box option").index(opt);
            window.playlistActive=true;
-           module.load(musicPath+$("#playlist_box option:selected").val());
+           module.load(musicPath+opt.val());
            clearInterval(loadInterval);
         }
       }, 200);
@@ -646,6 +648,7 @@ $(document).ready(function() {
 
   $("#next_track").click(function(){
     var opt=$("#playlist_box option:selected");
+    if (!opt.length) { opt = $("#playlist_box option").first(); }
     if (opt.length) {
       var n=$(opt).next("option");
       if (n.length) {
@@ -662,6 +665,7 @@ $(document).ready(function() {
 
   $("#prev_track").click(function(){
     var opt=$("#playlist_box option:selected");
+    if (!opt.length) { opt = $("#playlist_box option").first(); }
     if (opt.length) {
       var p=$(opt).prev("option");
       if (p.length) {
@@ -730,9 +734,9 @@ $(document).ready(function() {
       if ($("#modfile").val()!="") {
         var loadInterval=setInterval(function(){
           if (!module.delayload) {
-             window.currentModule=$("#modfile").val();
+             window.currentModule=($("#modfile").val()||[])[0];
              window.playlistActive=false;
-             module.load(musicPath+$("#modfile").val());
+             module.load(musicPath+($("#modfile").val()||[])[0]);
              clearInterval(loadInterval);
              showLoaderInfo(module);
           }
