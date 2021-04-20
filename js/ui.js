@@ -420,7 +420,8 @@ $(document).ready(function() {
 
     // if in playlist mode, load next song
     if (window.playlistActive && module.endofsong) {
-      var opt=$("#playlist_box option:selected");
+      var opt=$("#playlist_box option:selected").first();
+      if (!opt.length) { opt = $("#playlist_box option").first(); }
       if (opt.length) {
         var n=$(opt).next("option");
         if (n.length) {
@@ -611,7 +612,7 @@ $(document).ready(function() {
   });
 
   $("#playlist_up").click(function(){
-    var opt=$("#playlist_box option:selected");
+    var opt=$("#playlist_box option:selected").first();
     if (opt.length) {
       var p=$(opt).prev("option");
       if (p.length) {
@@ -629,7 +630,7 @@ $(document).ready(function() {
   });
 
   $("#playlist_dn").click(function(){
-    var opt=$("#playlist_box option:selected");
+    var opt=$("#playlist_box option:selected").first();
     if (opt.length) {
       var n=$(opt).next("option");
       if (n.length) {
@@ -647,7 +648,7 @@ $(document).ready(function() {
   });
 
   $("#next_track").click(function(){
-    var opt=$("#playlist_box option:selected");
+    var opt=$("#playlist_box option:selected").first();
     if (!opt.length) { opt = $("#playlist_box option").first(); }
     if (opt.length) {
       var n=$(opt).next("option");
@@ -664,7 +665,7 @@ $(document).ready(function() {
   });
 
   $("#prev_track").click(function(){
-    var opt=$("#playlist_box option:selected");
+    var opt=$("#playlist_box option:selected").first();
     if (!opt.length) { opt = $("#playlist_box option").first(); }
     if (opt.length) {
       var p=$(opt).prev("option");
