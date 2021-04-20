@@ -25,6 +25,14 @@ You can test the player here:
 
 <a href="https://music.cryptofolio.live">https://music.cryptofolio.live</a>
 
+Supported module formats:
+- https://www.exotica.org.uk/wiki/Protracker
+- https://www.exotica.org.uk/wiki/StarTrekker
+- https://www.exotica.org.uk/wiki/NoiseTracker
+- https://www.exotica.org.uk/wiki/SoundTracker
+- https://www.exotica.org.uk/wiki/ChipTracker
+
+
 
 Copyrights:
 - MOD/S3M/XM module player for Web Audio (c) 2021 krzykos
