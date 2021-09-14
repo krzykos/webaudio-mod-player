@@ -516,7 +516,7 @@ $(document).ready(function() {
   $("#load_song").click(function(){
     $("#loadercontainer").show();
     $("#innercontainer").hide();
-    $("#modfile").focus();
+    //$("#modfile").focus();
     var s=document.getElementById("modfile");
     var i=s.selectedIndex;
     if (!s[i]) return;
@@ -746,4 +746,21 @@ $(document).ready(function() {
     }
   }
   request.send();
+
+  var dragged = null;
+  var position = document.body.clientHeight - $('#headercontainer')[0].clientHeight - 12;
+  $('#outercontainer').css('transform', `translate(0, ${position}px)`);
+  $('#headercontainer').on('mousedown', event => {
+    dragged = event.clientY;
+  });
+  $(document).on('mouseup', () => {
+    dragged = null;
+  });
+  $(document).on('mousemove', event => {
+    if (dragged === null) return;
+    const offset = event.clientY - dragged;
+    dragged = event.clientY;
+    position = Math.max(position + offset, 0);
+    $('#outercontainer').css('transform', `translate(0, ${position}px)`);
+  });
 });
